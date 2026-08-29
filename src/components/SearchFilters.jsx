@@ -3,19 +3,26 @@ import { useContext, useState } from "react";
 import { MyContext } from "../context/MyContext";
 
 const SearchFilters = () => {
-  
-  const {filterValue,setFilterValue} = useContext(MyContext)
+  const { filterValue, setFilterValue } = useContext(MyContext);
 
   const handleChange = (e) => {
     let { name, value } = e.target;
-   setFilterValue({ ...filterValue, [name]: value });
+    setFilterValue({ ...filterValue, [name]: value });
     console.log(filterValue);
   };
 
   const clear = (key) => {
-    console.log(key) 
-      setFilterValue({ ...filterValue, [key]:"" });
-   }
+    console.log(key);
+    setFilterValue({ ...filterValue, [key]: "" });
+  };
+
+  const clearAll = () => {
+    setFilterValue({
+      search: "",
+      category: "",
+      featured: "",
+    });
+  };
 
   return (
     <div className="w-full rounded-2xl border border-gray-500 bg-[#111111] p-4">
@@ -34,7 +41,15 @@ const SearchFilters = () => {
             className="ml-3 w-full bg-transparent text-sm text-white outline-none placeholder:text-gray-500"
           />
 
-          {filterValue.search ? <X size={16} onClick={()=>clear("search")} className="cursor-pointer text-gray-500" /> : ""}
+          {filterValue.search ? (
+            <X
+              size={16}
+              onClick={() => clear("search")}
+              className="cursor-pointer text-gray-500"
+            />
+          ) : (
+            ""
+          )}
         </div>
 
         {/* Category */}
@@ -42,7 +57,7 @@ const SearchFilters = () => {
           <select
             onChange={handleChange}
             name="category"
-            value={filterValue.category}  
+            value={filterValue.category}
             className="w-48 appearance-none pl-2 bg-[#202020] text-white outline-none"
           >
             <option
@@ -68,7 +83,6 @@ const SearchFilters = () => {
 
             <option
               value="furniture"
-              
               className="bg-[#202020] text-white checked:bg-main-color checked:text-black"
             >
               Furniture
@@ -150,7 +164,10 @@ const SearchFilters = () => {
 
         {/* Clear */}
         {filterValue.search ? (
-          <button className="flex items-center gap-2 rounded-xl border border-red-900/50 bg-red-950/30 px-5 py-2.5 text-sm text-red-400">
+          <button
+            onClick={clearAll}
+            className="flex items-center gap-2 rounded-xl border border-red-900/50 bg-red-950/30 px-5 py-2.5 text-sm text-red-400"
+          >
             <X size={16} />
             Clear
           </button>
@@ -166,12 +183,16 @@ const SearchFilters = () => {
         <div className="flex w-full flex-col">
           <div className="my-3 border-t border-gray-500" />
           <div className="flex gap-2">
-            {Object.entries(filterValue).map(([key, value]) => ( value?
-              <span className="inline-flex items-center gap-1 rounded-full bg-[#2b3500] px-2 py-1 text-xs text-main-color">
-                {value}
-              <X key={key} onClick={()=> clear(key)} size={12} />
-            </span>:""
-            ))}
+            {Object.entries(filterValue).map(([key, value]) =>
+              value ? (
+                <span className="inline-flex items-center gap-1 rounded-full bg-[#2b3500] px-2 py-1 text-xs text-main-color">
+                  {value}
+                  <X key={key} onClick={() => clear(key)} size={12} />
+                </span>
+              ) : (
+                ""
+              ),
+            )}
           </div>
         </div>
       ) : (

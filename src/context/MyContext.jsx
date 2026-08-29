@@ -1022,7 +1022,6 @@ export const ContextProvider = ({ children }) => {
     );
 
     if (loginUser) {
-      console.log("loggedin")
       setCurrentUser(loginUser || {});
       saveLocal("sm_user", loginUser);
       showNotification("Login Successfull");
@@ -1035,10 +1034,10 @@ export const ContextProvider = ({ children }) => {
     return false;
   };
 
-  const logoutUser = ()=>{
-    showNotification("Logged out. See you soon! 👋")
-    setCurrentUser({})
-  }
+  const logoutUser = () => {
+    showNotification("Logged out. See you soon! 👋");
+    setCurrentUser({});
+  };
 
   return (
     <MyContext.Provider
