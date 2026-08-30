@@ -6,7 +6,7 @@ const WelcomeBanner = () => {
   const { toShop } =useContext(MyContext)
 
   return (
-    <section className="relative mx-auto mt-8 w-full max-w-[1216px] overflow-hidden rounded-[26px] border border-zinc-400 bg-[#111111] px-8 py-8 sm:px-10 sm:py-9 lg:mt-10 lg:px-12 lg:py-12">
+    <section className="relative mx-auto mt-8 w-full max-w-304 overflow-hidden rounded-[26px] border border-zinc-400 bg-[#111111] px-8 py-8 sm:px-10 sm:py-9 lg:mt-10 lg:px-12 lg:py-12">
       {/* Grid Background */}
       <div className="absolute inset-0 opacity-30">
         <div
